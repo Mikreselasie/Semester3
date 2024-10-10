@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics Todo List</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e0e5ec;
+            --text-color: #333333;
+            --accent-color: #4a90e2;
+            --shadow-color: #a3b1c6;
+            --highlight-color: #ffffff;
+        }
+
+        .dark-mode {
+            --bg-color: #2d3748;
+            --text-color: #e2e8f0;
+            --accent-color: #63b3ed;
+            --shadow-color: #1a202c;
+            --highlight-color: #4a5568;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px var(--shadow-color);
+        }
+
+        .todo-list {
+            list-style-type: none;
+        }
+
+        .todo-item {
+            background-color: var(--bg-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 8px 8px 15px var(--shadow-color), -8px -8px 15px var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .todo-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .todo-item h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .todo-item ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .todo-item li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 0.5rem;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item input[type="checkbox"]:checked {
+            background-color: var(--accent-color);
+        }
+
+        .todo-item input[type="checkbox"]:checked::after {
+            content: '\2714';
+            font-size: 14px;
+            color: var(--bg-color);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .todo-item label {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: var(--highlight-color);
+            border-radius: 5px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--bg-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 4px 4px 10px var(--shadow-color), -4px -4px 10px var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-shape {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.1;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .shape1 {
+            top: 10%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background-color: var(--accent-color);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .shape2 {
+            top: 70%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .shape3 {
+            bottom: 20%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-color);
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .todo-item {
+                padding: 1rem;
+            }
+
+            .todo-item h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Economics Course Outline</h1>
+        <ul class="todo-list">
+            <li class="todo-item">
+                <h2>Chapter One: Basics of Economics</h2>
+                <ul>
+                    <li><input type="checkbox" id="task1_1"><label for="task1_1">1.1 Definition and meaning of economics</label></li>
+                    <li><input type="checkbox" id="task1_2"><label for="task1_2">1.2 Rationale of economics</label></li>
+                    <li><input type="checkbox" id="task1_3"><label for="task1_3">1.3 Scope and methods of economic analysis</label></li>
+                    <li><input type="checkbox" id="task1_4"><label for="task1_4">1.3.1 Micro and macro economics</label></li>
+                    <li><input type="checkbox" id="task1_5"><label for="task1_5">1.3.2 Positive and normative economics</label></li>
+                    <li><input type="checkbox" id="task1_6"><label for="task1_6">1.3.3 Inductive and deductive reasoning in economics</label></li>
+                    <li><input type="checkbox" id="task1_7"><label for="task1_7">1.4 Scarcity, choice, opportunity cost and production possibilities frontier</label></li>
+                    <li><input type="checkbox" id="task1_8"><label for="task1_8">1.5 Basic economic questions</label></li>
+                    <li><input type="checkbox" id="task1_9"><label for="task1_9">1.6 Economic systems</label></li>
+                    <li><input type="checkbox" id="task1_10"><label for="task1_10">1.7 Decision making units and the circular flow model</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="10"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Two: Theory of Demand and Supply</h2>
+                <ul>
+                    <li><input type="checkbox" id="task2_1"><label for="task2_1">2.1 Theory of Demand</label></li>
+                    <li><input type="checkbox" id="task2_2"><label for="task2_2">2.1.1 Demand function, demand schedule and demand curve</label></li>
+                    <li><input type="checkbox" id="task2_3"><label for="task2_3">2.1.2 Determinants of Demand</label></li>
+                    <li><input type="checkbox" id="task2_4"><label for="task2_4">2.1.3 Law of Demand and exceptions</label></li>
+                    <li><input type="checkbox" id="task2_5"><label for="task2_5">2.1.4 Shift vs movement along the demand curve</label></li>
+                    <li><input type="checkbox" id="task2_6"><label for="task2_6">2.1.5 Elasticity of demand</label></li>
+                    <li><input type="checkbox" id="task2_7"><label for="task2_7">2.1.6 Types of elasticity of demand</label></li>
+                    <li><input type="checkbox" id="task2_8"><label for="task2_8">2.2 Theory of Supply</label></li>
+                    <li><input type="checkbox" id="task2_9"><label for="task2_9">2.2.1 Supply function, supply schedule and supply curve</label></li>
+                    <li><input type="checkbox" id="task2_10"><label for="task2_10">2.2.2 Determinants of Supply</label></li>
+                    <li><input type="checkbox" id="task2_11"><label for="task2_11">2.2.3 Law of Supply and exceptions</label></li>
+                    <li><input type="checkbox" id="task2_12"><label for="task2_12">2.2.4 Shift vs movement along the supply curve</label></li>
+                    <li><input type="checkbox" id="task2_13"><label for="task2_13">2.2.5 Elasticity of supply</label></li>
+                    <li><input type="checkbox" id="task2_14"><label for="task2_14">2.3 Market equilibrium</label></li>
+                    <li><input type="checkbox" id="task2_15"><label for="task2_15">2.4 Effect of government intervention</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="15"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Three: Theory of Production and Costs</h2>
+                <ul>
+                    <li><input type="checkbox" id="task3_1"><label for="task3_1">3.1 Factors of production</label></li>
+                    <li><input type="checkbox" id="task3_2"><label for="task3_2">3.2 Production function</label></li>
+                    <li><input type="checkbox" id="task3_3"><label for="task3_3">3.3 Short-run vs long-run production</label></li>
+                    <li><input type="checkbox" id="task3_4"><label for="task3_4">3.4 Law of variable proportions</label></li>
+                    <li><input type="checkbox" id="task3_5"><label for="task3_5">3.5 Total, average and marginal product</label></li>
+                    <li><input type="checkbox" id="task3_6"><label for="task3_6">3.6 Costs of production</label></li>
+                    <li><input type="checkbox" id="task3_7"><label for="task3_7">3.7 Short-run and long-run cost curves</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="7"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Four: Market Structures</h2>
+                <ul>
+                    <li><input type="checkbox" id="task4_1"><label for="task4_1">4.1 Perfect competition</label></li>
+                    <li><input type="checkbox" id="task4_2"><label for="task4_2">4.2 Monopoly</label></li>
+                    <li><input type="checkbox" id="task4_3"><label for="task4_3">4.3 Monopolistic competition</label></li>
+                    <li><input type="checkbox" id="task4_4"><label for="task4_4">4.4 Oligopoly</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="4"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Five: Market Failures and Government Intervention</h2>
+                <ul>
+                    <li><input type="checkbox" id="task5_1"><label for="task5_1">5.1 Types of market failures</label></li>
+                    <li><input type="checkbox" id="task5_2"><label for="task5_2">5.2 Public goods and externalities</label></li>
+                    <li><input type="checkbox" id="task5_3"><label for="task5_3">5.3 Role of government in correcting market failures</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="3"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Six: Money and Banking</h2>
+                <ul>
+                    <li><input type="checkbox" id="task6_1"><label for="task6_1">6.1 Definition and functions of money</label></li>
+                    <li><input type="checkbox" id="task6_2"><label for="task6_2">6.2 Types of money</label></li>
+                    <li><input type="checkbox" id="task6_3"><label for="task6_3">6.3 Banking system and financial markets</label></li>
+                    <li><input type="checkbox" id="task6_4"><label for="task6_4">6.4 Role of banks in the economy</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="4"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Seven: Fiscal and Monetary Policies</h2>
+                <ul>
+                    <li><input type="checkbox" id="task7_1"><label for="task7_1">7.1 Fiscal policy: Definition and objectives</label></li>
+                    <li><input type="checkbox" id="task7_2"><label for="task7_2">7.2 Monetary policy: Definition and objectives</label></li>
+                    <li><input type="checkbox" id="task7_3"><label for="task7_3">7.3 Instruments of fiscal and monetary policy</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="3"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Eight: International Trade</h2>
+                <ul>
+                    <li><input type="checkbox" id="task8_1"><label for="task8_1">8.1 Benefits and costs of international trade</label></li>
+                    <li><input type="checkbox" id="task8_2"><label for="task8_2">8.2 Comparative advantage</label></li>
+                    <li><input type="checkbox" id="task8_3"><label for="task8_3">8.3 Trade policies</label></li>
+                    <li><input type="checkbox" id="task8_4"><label for="task8_4">8.4 Exchange rates</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="4"></div></div>
+            </li>
+        </ul>
+        <button class="dark-mode-toggle"><i class="fas fa-moon"></i></button>
+    </div>
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
+    <script>
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Trends Course Outline</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e0e5ec;
+            --text-color: #333333;
+            --accent-color: #4a90e2;
+            --shadow-color: #a3b1c6;
+            --highlight-color: #ffffff;
+        }
+
+        .dark-mode {
+            --bg-color: #2d3748;
+            --text-color: #e2e8f0;
+            --accent-color: #63b3ed;
+            --shadow-color: #1a202c;
+            --highlight-color: #4a5568;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px var(--shadow-color);
+        }
+
+        .todo-list {
+            list-style-type: none;
+        }
+
+        .todo-item {
+            background-color: var(--bg-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 8px 8px 15px var(--shadow-color), -8px -8px 15px var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .todo-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .todo-item h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .todo-item ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .todo-item li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 0.5rem;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item input[type="checkbox"]:checked {
+            background-color: var(--accent-color);
+        }
+
+        .todo-item input[type="checkbox"]:checked::after {
+            content: '\2714';
+            font-size: 14px;
+            color: var(--bg-color);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .todo-item label {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--bg-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 4px 4px 10px var(--shadow-color), -4px -4px 10px var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .todo-item {
+                padding: 1rem;
+            }
+
+            .todo-item h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Global Trends Course Outline</h1>
+        <ul class="todo-list">
+            <li class="todo-item">
+                <h2>Chapter One: Understanding International Relations</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter1-1"><label for="chapter1-1">1.1 Understanding international relations</label></li>
+                    <li><input type="checkbox" id="chapter1-2"><label for="chapter1-2">1.2 Conceptualizing nationalism, nations and state</label></li>
+                    <li><input type="checkbox" id="chapter1-3"><label for="chapter1-3">1.3 The nature & evolution of International relations</label></li>
+                    <li><input type="checkbox" id="chapter1-4"><label for="chapter1-4">1.4 The purposes of international relations</label></li>
+                    <li><input type="checkbox" id="chapter1-5"><label for="chapter1-5">1.5 Actors in international relations</label></li>
+                    <li><input type="checkbox" id="chapter1-6"><label for="chapter1-6">1.6 Levels of analysis in international relations</label></li>
+                    <li><input type="checkbox" id="chapter1-7"><label for="chapter1-7">1.7 The structure of international system</label></li>
+                    <li><input type="checkbox" id="chapter1-8"><label for="chapter1-8">1.8 Theories of international relations</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Two: Understanding Foreign Policy & Diplomacy</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter2-1"><label for="chapter2-1">2.1 Defining National Interest</label></li>
+                    <li><input type="checkbox" id="chapter2-2"><label for="chapter2-2">2.2 Defining Foreign Policy</label></li>
+                    <li><input type="checkbox" id="chapter2-3"><label for="chapter2-3">2.3 Foreign Policy Objectives</label></li>
+                    <li><input type="checkbox" id="chapter2-4"><label for="chapter2-4">2.4 Foreign Policy Behavior: Patterns and Trends</label></li>
+                    <li><input type="checkbox" id="chapter2-5"><label for="chapter2-5">2.5 Foreign Policy Dimensions</label></li>
+                    <li><input type="checkbox" id="chapter2-6"><label for="chapter2-6">2.6 Instruments of Foreign Policy</label></li>
+                    <li><input type="checkbox" id="chapter2-7"><label for="chapter2-7">2.7 Overview of Foreign Policy of Ethiopia during Tewodros II (1855-1868)</label></li>
+                    <li><input type="checkbox" id="chapter2-8"><label for="chapter2-8">2.8 Overview of Foreign Policy of Ethiopia during Yohannes IV (1872-1889)</label></li>
+                    <li><input type="checkbox" id="chapter2-9"><label for="chapter2-9">2.9 Overview of Foreign Policy of Ethiopia during Menelik II (1889-93)</label></li>
+                    <li><input type="checkbox" id="chapter2-10"><label for="chapter2-10">2.10 Overview of Foreign Policy of Ethiopia during Emperor Haile Selassie I (1916-1974)</label></li>
+                    <li><input type="checkbox" id="chapter2-11"><label for="chapter2-11">2.11 Overview of Foreign Policy of Ethiopia during the Military Government (1974—1991)</label></li>
+                    <li><input type="checkbox" id="chapter2-12"><label for="chapter2-12">2.12 The Foreign Policy of Ethiopia in the Post 1991</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Three: International Political Economy (IPE)</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter3-1"><label for="chapter3-1">3.1 Meaning and Nature of IPE</label></li>
+                    <li><input type="checkbox" id="chapter3-2"><label for="chapter3-2">3.2 Theoretical perspectives of IPE</label></li>
+                    <li><input type="checkbox" id="chapter3-3"><label for="chapter3-3">3.3 Survey of the Most Influential National Political Economy systems in the world</label>
+                        <ul>
+                            <li><input type="checkbox" id="chapter3-3-1"><label for="chapter3-3-1">3.3.1 The American System of Market-Oriented Capitalism</label></li>
+                            <li><input type="checkbox" id="chapter3-3-2"><label for="chapter3-3-2">3.3.2 The Japanese System of Developmental Capitalism</label></li>
+                            <li><input type="checkbox" id="chapter3-3-3"><label for="chapter3-3-3">3.3.3 The German System of Social Market Capitalism</label></li>
+                            <li><input type="checkbox" id="chapter3-3-4"><label for="chapter3-3-4">3.3.4 Differences among National Political Economy Systems</label></li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox" id="chapter3-4"><label for="chapter3-4">3.4 Core Issues, Governing institutions and Governance of International Political Economy</label>
+                        <ul>
+                            <li><input type="checkbox" id="chapter3-4-1"><label for="chapter3-4-1">3.4.1 International Trade and the WTO</label></li>
+                            <li><input type="checkbox" id="chapter3-4-2"><label for="chapter3-4-2">3.4.2 International Investment and the WB</label></li>
+                            <li><input type="checkbox" id="chapter3-4-3"><label for="chapter3-4-3">3.4.3 International Finance and the IMF</label></li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox" id="chapter3-5"><label for="chapter3-5">3.5 Exchange Rates and the Exchange-Rate System</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Four: Globalization and Regionalism</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter4-1"><label for="chapter4-1">4.1 Defining Globalization</label></li>
+                    <li><input type="checkbox" id="chapter4-2"><label for="chapter4-2">4.2 The Globalization Debates</label></li>
+                    <li><input type="checkbox" id="chapter4-3"><label for="chapter4-3">4.3 Globalization and Its Impacts on Africa</label></li>
+                    <li><input type="checkbox" id="chapter4-4"><label for="chapter4-4">4.4 Ethiopia in a Globalized World</label></li>
+                    <li><input type="checkbox" id="chapter4-5"><label for="chapter4-5">4.5 Pros and Cons of Globalization</label></li>
+                    <li><input type="checkbox" id="chapter4-6"><label for="chapter4-6">4.6 Defining Regionalism and Regional Integration</label></li>
+                    <li><input type="checkbox" id="chapter4-7"><label for="chapter4-7">4.7 Major Theories of Regional Integrations</label></li>
+                    <li><input type="checkbox" id="chapter4-8"><label for="chapter4-8">4.8 Selected Cases of Regional Integration</label></li>
+                    <li><input type="checkbox" id="chapter4-9"><label for="chapter4-9">4.9 Regionalization versus Globalization and State</label></li>
+                    <li><input type="checkbox" id="chapter4-10"><label for="chapter4-10">4.10 The Relations between Regionalization and Globalization</label></li>
+                    <li><input type="checkbox" id="chapter4-11"><label for="chapter4-11">4.11 Regionalization, Globalization and the State</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter Five: Major Contemporary Global Issues</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter5-1"><label for="chapter5-1">5.1 Global Security Issues</label></li>
+                    <li><input type="checkbox" id="chapter5-2"><label for="chapter5-2">5.2 Global Environmental Issues</label></li>
+                    <li><input type="checkbox" id="chapter5-3"><label for="chapter5-3">5.3 Global Socio-economic Issues</label></li>
+                    <li><input type="checkbox" id="chapter5-4"><label for="chapter5-4">5.4 Global Cultural Issues</label></li>
+                </ul>
+            </li>
+        </ul>
+        <button class="dark-mode-toggle"><i class="fas fa-moon"></i></button>
+    </div>
+    <script>
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>

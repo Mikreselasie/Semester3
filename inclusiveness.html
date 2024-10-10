@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Outline</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e0e5ec;
+            --text-color: #333333;
+            --accent-color: #4a90e2;
+            --shadow-color: #a3b1c6;
+            --highlight-color: #ffffff;
+        }
+
+        .dark-mode {
+            --bg-color: #2d3748;
+            --text-color: #e2e8f0;
+            --accent-color: #63b3ed;
+            --shadow-color: #1a202c;
+            --highlight-color: #4a5568;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px var(--shadow-color);
+        }
+
+        .todo-list {
+            list-style-type: none;
+        }
+
+        .todo-item {
+            background-color: var(--bg-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 8px 8px 15px var(--shadow-color), -8px -8px 15px var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .todo-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .todo-item h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .todo-item ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .todo-item li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 0.5rem;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item input[type="checkbox"]:checked {
+            background-color: var(--accent-color);
+        }
+
+        .todo-item input[type="checkbox"]:checked::after {
+            content: '\2714';
+            font-size: 14px;
+            color: var(--bg-color);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .todo-item label {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: var(--highlight-color);
+            border-radius: 5px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--bg-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 4px 4px 10px var(--shadow-color), -4px -4px 10px var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-shape {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.1;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .shape1 {
+            top: 10%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background-color: var(--accent-color);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .shape2 {
+            top: 70%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .shape3 {
+            bottom: 20%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-color);
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .todo-item {
+                padding: 1rem;
+            }
+
+            .todo-item h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Inclusiveness Course Outline</h1>
+        <ul class="todo-list">
+            <li class="todo-item">
+                <h2>Chapter 1: Understanding Disability and Vulnerability</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter1-1"><label for="chapter1-1">1.1 Definitions of disability and vulnerability</label></li>
+                    <li><input type="checkbox" id="chapter1-2"><label for="chapter1-2">1.2 Causes of impairments and vulnerability</label></li>
+                    <li><input type="checkbox" id="chapter1-3"><label for="chapter1-3">1.3 Types of impairments and vulnerable groups</label></li>
+                    <li><input type="checkbox" id="chapter1-4"><label for="chapter1-4">1.4 Historical background of modalities moving towards inclusion</label></li>
+                    <li><input type="checkbox" id="chapter1-5"><label for="chapter1-5">1.5 Evolution of the concept of disability</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 2: Concept of Inclusion</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter2-1"><label for="chapter2-1">2.1 Definition of inclusion</label></li>
+                    <li><input type="checkbox" id="chapter2-2"><label for="chapter2-2">2.2 Principles of inclusion</label></li>
+                    <li><input type="checkbox" id="chapter2-3"><label for="chapter2-3">2.3 Rationale for inclusion</label></li>
+                    <li><input type="checkbox" id="chapter2-4"><label for="chapter2-4">2.4 Features and barriers of inclusive environment</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 3: Identification of the Impact of Disability and Differentiated Services</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter3-1"><label for="chapter3-1">3.1 The Impact of Disability and Vulnerability on Daily Life</label>
+                        <ul>
+                            <li><input type="checkbox" id="chapter3-1-1"><label for="chapter3-1-1">3.1.1 The Nature of impairment</label></li>
+                            <li><input type="checkbox" id="chapter3-1-2"><label for="chapter3-1-2">3.1.2 The Individual’s Personality</label></li>
+                            <li><input type="checkbox" id="chapter3-1-3"><label for="chapter3-1-3">3.1.3 The Meaning of the impairment to the Individual</label></li>
+                            <li><input type="checkbox" id="chapter3-1-4"><label for="chapter3-1-4">3.1.4 The Individual’s Current Life Circumstances</label></li>
+                            <li><input type="checkbox" id="chapter3-1-5"><label for="chapter3-1-5">3.1.5 The Individual's Support System</label></li>
+                            <li><input type="checkbox" id="chapter3-1-6"><label for="chapter3-1-6">3.1.6 Economic Factors and Disability</label></li>
+                            <li><input type="checkbox" id="chapter3-1-7"><label for="chapter3-1-7">3.1.7 Political Factors and Disability</label></li>
+                            <li><input type="checkbox" id="chapter3-1-8"><label for="chapter3-1-8">3.1.8 Psychological Factors of Disability</label></li>
+                            <li><input type="checkbox" id="chapter3-1-9"><label for="chapter3-1-9">3.1.9 The Family and Disability</label></li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox" id="chapter3-2"><label for="chapter3-2">3.2 Special Needs of Persons with Disabilities and other Vulnerable groups</label>
+                        <ul>
+                            <li><input type="checkbox" id="chapter3-2-1"><label for="chapter3-2-1">3.2.1 Belongingness and disability</label></li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox" id="chapter3-3"><label for="chapter3-3">3.3 Disability Inclusive Intervention and Rehabilitation Services</label>
+                        <ul>
+                            <li><input type="checkbox" id="chapter3-3-1"><label for="chapter3-3-1">3.3.1 Definition and components of Rehabilitation Intervention</label></li>
+                            <li><input type="checkbox" id="chapter3-3-2"><label for="chapter3-3-2">3.3.2 Strategies to Disability Inclusive Intervention and Rehabilitation</label></li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox" id="chapter3-4"><label for="chapter3-4">3.4 Implement Inclusive Job Opportunities and Employment</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 4: Promoting Inclusive Culture</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter4-1"><label for="chapter4-1">4.1 Definition of inclusive culture</label></li>
+                    <li><input type="checkbox" id="chapter4-2"><label for="chapter4-2">4.2 Dimensions of inclusive culture</label></li>
+                    <li><input type="checkbox" id="chapter4-3"><label for="chapter4-3">4.3 Building inclusive community</label></li>
+                    <li><input type="checkbox" id="chapter4-4"><label for="chapter4-4">4.4 Strategies for the development of inclusive culture</label></li>
+                    <li><input type="checkbox" id="chapter4-5"><label for="chapter4-5">4.5 Inclusive values in terms of cultural norms</label></li>
+                    <li><input type="checkbox" id="chapter4-6"><label for="chapter4-6">4.6 Indigenous inclusive values and practices</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 5: Inclusion for Peace, Democracy and Development</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter5-1"><label for="chapter5-1">5.1 Definition of peace, democracy and development from the perspective of Inclusiveness</label></li>
+                    <li><input type="checkbox" id="chapter5-2"><label for="chapter5-2">5.2 Sources of Conflict</label></li>
+                    <li><input type="checkbox" id="chapter5-3"><label for="chapter5-3">5.3 The democratic principles for inclusive practices</label></li>
+                    <li><input type="checkbox" id="chapter5-4"><label for="chapter5-4">5.4 Respecting diverse needs, culture, values, demands and ideas</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 6: Relevant Policy and Legal Frameworks</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter6-1"><label for="chapter6-1">6.1 Components of policy and legal frameworks</label></li>
+                    <li><input type="checkbox" id="chapter6-2"><label for="chapter6-2">6.2 International legal frameworks in relation to inclusiveness</label></li>
+                    <li><input type="checkbox" id="chapter6-3"><label for="chapter6-3">6.3 Domestic policy and legal frameworks in relation to inclusiveness</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 7: Resource Management for Inclusion</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter7-1"><label for="chapter7-1">7.1 Resources for inclusion</label></li>
+                    <li><input type="checkbox" id="chapter7-2"><label for="chapter7-2">7.2 Planning for inclusive services</label></li>
+                </ul>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 8: Collaborative Partnership among Stakeholders</h2>
+                <ul>
+                    <li><input type="checkbox" id="chapter8-1"><label for="chapter8-1">8.1 Understanding the concepts of collaboration, partnership and stakeholder</label></li>
+                    <li><input type="checkbox" id="chapter8-2"><label for="chapter8-2">8.2 Key elements of successful collaboration</label></li>
+                    <li><input type="checkbox" id="chapter8-3"><label for="chapter8-3">8.3 The benefits and challenges of collaboration</label></li>
+                    <li><input type="checkbox" id="chapter8-4"><label for="chapter8-4">8.4 Characteristics of successful stakeholder partnerships</label></li>
+                    <li><input type="checkbox" id="chapter8-5"><label for="chapter8-5">8.5 Strategies for community involvement</label></li>
+                </ul>
+            </li>
+        </ul>
+        <button class="dark-mode-toggle"><i class="fas fa-moon"></i></button>
+    </div>
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
+    <script>
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>

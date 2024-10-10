@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Mathematics II Todo List</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e0e5ec;
+            --text-color: #333333;
+            --accent-color: #4a90e2;
+            --shadow-color: #a3b1c6;
+            --highlight-color: #ffffff;
+        }
+
+        .dark-mode {
+            --bg-color: #2d3748;
+            --text-color: #e2e8f0;
+            --accent-color: #63b3ed;
+            --shadow-color: #1a202c;
+            --highlight-color: #4a5568;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px var(--shadow-color);
+        }
+
+        .todo-list {
+            list-style-type: none;
+        }
+
+        .todo-item {
+            background-color: var(--bg-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 8px 8px 15px var(--shadow-color), -8px -8px 15px var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .todo-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .todo-item h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .todo-item ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .todo-item li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 0.5rem;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item input[type="checkbox"]:checked {
+            background-color: var(--accent-color);
+        }
+
+        .todo-item input[type="checkbox"]:checked::after {
+            content: '\2714';
+            font-size: 14px;
+            color: var(--bg-color);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .todo-item label {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: var(--highlight-color);
+            border-radius: 5px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--bg-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 4px 4px 10px var(--shadow-color), -4px -4px 10px var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-shape {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.1;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .shape1 {
+            top: 10%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background-color: var(--accent-color);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .shape2 {
+            top: 70%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .shape3 {
+            bottom: 20%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-color);
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .todo-item {
+                padding: 1rem;
+            }
+
+            .todo-item h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Applied Mathematics II Todo List</h1>
+        <ul class="todo-list">
+            <li class="todo-item">
+                <h2>Chapter 1: Sequence and Series</h2>
+                <ul>
+                    <li><input type="checkbox" id="task1_1"><label for="task1_1">1.1 Definition of sequence</label></li>
+                    <li><input type="checkbox" id="task1_2"><label for="task1_2">1.2 Convergence and divergence of a sequence, types of sequences</label></li>
+                    <li><input type="checkbox" id="task1_3"><label for="task1_3">1.3 Subsequence and limit points</label></li>
+                    <li><input type="checkbox" id="task1_4"><label for="task1_4">1.4 Definition of infinite series</label></li>
+                    <li><input type="checkbox" id="task1_5"><label for="task1_5">1.5 Convergence and divergence of a series, properties of convergent series</label></li>
+                    <li><input type="checkbox" id="task1_6"><label for="task1_6">1.6 Nonnegative terms and series</label></li>
+                    <li><input type="checkbox" id="task1_7"><label for="task1_7">1.7 Tests of convergence: Integral test, Comparison test, Ratio and Root tests</label></li>
+                    <li><input type="checkbox" id="task1_8"><label for="task1_8">1.8 Alternating series and alternating series test</label></li>
+                    <li><input type="checkbox" id="task1_9"><label for="task1_9">1.9 Absolute and conditional convergence</label></li>
+                    <li><input type="checkbox" id="task1_10"><label for="task1_10">1.10 Generalized convergence tests</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="10"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 2: Power Series</h2>
+                <ul>
+                    <li><input type="checkbox" id="task2_1"><label for="task2_1">2.1 Definition of power series at any x<sub>0</sub> and x<sub>0</sub>=0</label></li>
+                    <li><input type="checkbox" id="task2_2"><label for="task2_2">2.2 Convergence and divergence of power series, radius and interval of convergence</label></li>
+                    <li><input type="checkbox" id="task2_3"><label for="task2_3">2.3 Algebraic operations in convergent power series</label></li>
+                    <li><input type="checkbox" id="task2_4"><label for="task2_4">2.4 Differentiation and integration of power series</label></li>
+                    <li><input type="checkbox" id="task2_5"><label for="task2_5">2.5 Taylor and Maclaurin series</label></li>
+                    <li><input type="checkbox" id="task2_6"><label for="task2_6">2.6 Binomial series</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="6"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 3: Fourier Series</h2>
+                <ul>
+                    <li><input type="checkbox" id="task3_1"><label for="task3_1">3.1 Periodic Functions</label></li>
+                    <li><input type="checkbox" id="task3_2"><label for="task3_2">3.2 Trigonometric series</label></li>
+                    <li><input type="checkbox" id="task3_3"><label for="task3_3">3.3 Fourier series representation; Dirichlet’s Theorem</label></li>
+                    <li><input type="checkbox" id="task3_4"><label for="task3_4">3.4 Fourier series of even and odd functions</label></li>
+                    <li><input type="checkbox" id="task3_5"><label for="task3_5">3.5 Half-range expansion</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="5"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 4: Differential Calculus of Functions of Several Variables</h2>
+                <ul>
+                    <li><input type="checkbox" id="task4_1"><label for="task4_1">4.1 Definition of function of several variables, examples, level curves and graphs of function of two variables, level surfaces</label></li>
+                    <li><input type="checkbox" id="task4_2"><label for="task4_2">4.2 Limit and continuity</label></li>
+                    <li><input type="checkbox" id="task4_3"><label for="task4_3">4.3 Partial derivatives, higher order partial derivatives</label></li>
+                    <li><input type="checkbox" id="task4_4"><label for="task4_4">4.4 Directional derivatives and gradients</label></li>
+                    <li><input type="checkbox" id="task4_5"><label for="task4_5">4.5 Total differentials, tangent planes and tangent plane approximation</label></li>
+                    <li><input type="checkbox" id="task4_6"><label for="task4_6">4.6 The chain rule, implicit differentiation</label></li>
+                    <li><input type="checkbox" id="task4_7"><label for="task4_7">4.7 Relative extrema of functions of two variables</label></li>
+                    <li><input type="checkbox" id="task4_8"><label for="task4_8">4.8 Extreme values of a function on a given set</label></li>
+                    <li><input type="checkbox" id="task4_9"><label for="task4_9">4.9 Extreme under constraints, Lagrange multipliers</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="9"></div></div>
+            </li>
+            <li class="todo-item">
+                <h2>Chapter 5: Multiple Integrals</h2>
+                <ul>
+                    <li><input type="checkbox" id="task5_1"><label for="task5_1">5.1 Double integral and their evaluation by iterated integrals</label></li>
+                    <li><input type="checkbox" id="task5_2"><label for="task5_2">5.2 Double integral in polar coordinates</label></li>
+                    <li><input type="checkbox" id="task5_3"><label for="task5_3">5.3 Application: Area, Surface area, center of mass of plane region</label></li>
+                    <li><input type="checkbox" id="task5_4"><label for="task5_4">5.4 Triple integrals and their evaluation by iterated integrals</label></li>
+                    <li><input type="checkbox" id="task5_5"><label for="task5_5">5.5 Triple integrals in cylindrical and spherical coordinates</label></li>
+                    <li><input type="checkbox" id="task5_6"><label for="task5_6">5.6 Application: Volume, center of mass of solid region</label></li>
+                    <li><input type="checkbox" id="task5_7"><label for="task5_7">5.7 Change of variables in multiple integrals</label></li>
+                </ul>
+                <div class="progress-bar"><div class="progress" data-target="7"></div></div>
+            </li>
+        </ul>
+    </div>
+    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
+
+    <script>
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const body = document.body;
+        const icon = darkModeToggle.querySelector('i');
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const progressBars = document.querySelectorAll('.progress');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        function updateProgress() {
+            progressBars.forEach(progressBar => {
+                const todoItem = progressBar.closest('.todo-item');
+                const total = todoItem.querySelectorAll('input[type="checkbox"]').length;
+                const checked = todoItem.querySelectorAll('input[type="checkbox"]:checked').length;
+                const percentage = (checked / total) * 100;
+                progressBar.style.width = `${percentage}%`;
+            });
+        }
+
+        updateProgress();
+    </script>
+</body>
+</html>
+
